@@ -47,7 +47,7 @@ Important Note about H2 In-Memory:
 Since application.properties likely still has spring.jpa.hibernate.ddl-auto=create-drop, the database schema is created when the application starts and completely dropped when application is stopped. This means:
 Any data added via the API will be visible in the H2 console while the application is running. As soon as the application is stopped, all data in the H2 database will be lost.
 
-Here are the ways to test your application:
+Here are the ways to test the application:
 ---------------------------------------------------
 Method 1: Using Swagger UI (Recommended for easy interactive testing)
 
@@ -136,3 +136,5 @@ curl -X DELETE http://localhost:8082/api/customers/{id}
 Method 3: Using API Development Tools (Postman, Insomnia, IntelliJ HTTP Client)
 These tools provide a graphical interface for building and managing complex API requests.
 
+##**Please refer to the CusstomerService class for the tier calculation business logic****
+## It has been commented as // --- Tier Calculation Logic ---
