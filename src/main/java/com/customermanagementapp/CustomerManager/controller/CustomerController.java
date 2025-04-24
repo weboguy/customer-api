@@ -88,8 +88,7 @@ public class CustomerController {
     public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
         // POST input is still the Customer entity
         Customer createdCustomer = customerService.createCustomer(customer);
-        // NOTE: The response here is the saved entity. If you want the DTO with tier
-        // immediately on creation, you'd need to fetch it again or map it here.
+        // NOTE: The response here is the saved entity.
         // For simplicity, returning the saved entity as requested in the original POST requirement.
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
@@ -109,7 +108,7 @@ public class CustomerController {
                                                     @Valid @RequestBody Customer customerDetails) throws CustomerNotFoundException {
         Customer updatedCustomer = customerService.updateCustomer(id, customerDetails);
         // NOTE: Similar to POST, returning the saved entity. To get the DTO with tier,
-        // you'd need to fetch/map it here.
+        // need to fetch/map it here.
         return ResponseEntity.ok(updatedCustomer);
     }
 
@@ -128,7 +127,7 @@ public class CustomerController {
 
     // Note: The /tier endpoint can still exist, but the main GET endpoints now
     // include the tier directly in the customer object structure.
-    // You could remove this /tier endpoint if you prefer.
+    // This /tier endpoint can be removed if one prefers.
     @Operation(summary = "Get membership tier for a customer by ID", description = "Calculate and return the membership tier for a customer.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Tier calculated successfully",

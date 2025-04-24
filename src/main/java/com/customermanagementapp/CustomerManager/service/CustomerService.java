@@ -4,7 +4,6 @@ import com.customermanagementapp.CustomerManager.dto.CustomerResponseDTO;
 import com.customermanagementapp.CustomerManager.entity.Customer;
 import com.customermanagementapp.CustomerManager.error.CustomerNotFoundException;
 import com.customermanagementapp.CustomerManager.repository.CustomerRepository;
-import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,10 +58,6 @@ public class CustomerService {
     }
 
     public Customer createCustomer(Customer customer) {
-        /*// checks here if email already exists means customer already exists
-        if(customer.getCustomerId() != null) {
-            throw new RuntimeException("Customer already exists");
-        }*/
         return customerRepository.save(customer);
     }
 
