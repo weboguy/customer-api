@@ -1,5 +1,5 @@
 # CustomerManagementAPI
- This is the HandsOn Assignment for TCS
+ This is the HandsOn Assignment with API's for CustomerManagement
  
 Run the application and then access the H2 database console to view the data.
 
