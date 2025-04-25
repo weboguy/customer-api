@@ -137,4 +137,4 @@ Method 3: Using API Development Tools (Postman, Insomnia, IntelliJ HTTP Client)
 These tools provide a graphical interface for building and managing complex API requests.
 
 ##**Please refer to the CusstomerService class for the tier calculation business logic****
-## It has been commented as // --- Tier Calculation Logic ---
+## It starts from the comment // --- Tier Calculation Logic ---
