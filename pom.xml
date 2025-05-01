@@ -14,6 +14,7 @@
 
 	<properties>
 		<java.version>17</java.version>
+		<server.port>8082</server.port>
 	</properties>
 
 	<dependencies>
@@ -77,6 +78,119 @@
 				</exclude>
 			</excludes>
 		</configuration>
+	</plugin>
+	<plugin>
+		<groupId>org.springdoc</groupId>
+		<artifactId>springdoc-openapi-maven-plugin</artifactId>
+		<version>1.4</version> <executions>
+		<execution>
+			<id>generate-openapi-spec</id>
+			<phase>package</phase>
+			<goals>
+				<goal>generate</goal>
+			</goals>
+			<configuration>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<skip>false</skip>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages> <apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+				<apiDocsUrl>http://localhost:${server.port}/v3/api-docs.yaml</apiDocsUrl>
+				<outputFileName>openapi.yaml</outputFileName>
+				<outputDir>${project.basedir}/docs</outputDir>
+				<format>YAML</format>
+				<resourcePackages>com.example.customerapi</resourcePackages>
+			</configuration>
+		</execution>
+	</executions>
 	</plugin>
 </plugins>
 </build>
