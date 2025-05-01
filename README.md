@@ -17,7 +17,7 @@ Go to the H2 console URL: http://localhost:8082/h2-console
 Log in to the H2 Console:
 
 The H2 console login page will appear. You need to enter the correct connection details for the in-memory database managed by Spring Boot.
-JDBC URL: jdbc:h2:mem:dcbapp (This is the default URL used by Spring Boot for in-memory H2 unless you've explicitly changed spring.datasource.url to an H2 path in application.properties).
+JDBC URL: jdbc:h2:mem:dcbapp (This is the default URL used by Spring Boot for in-memory H2 unless explicitly changed the spring.datasource.url to an H2 path in application.properties).
 User Name: sa (This is the default H2 username).
 Password: password (The default H2 password for the 'sa' user when used with Spring Boot's defaults is typically empty).
 Click the "Connect" button.
@@ -137,4 +137,4 @@ Method 3: Using API Development Tools (Postman, Insomnia, IntelliJ HTTP Client)
 These tools provide a graphical interface for building and managing complex API requests.
 
 ##**Please refer to the CusstomerService class for the tier calculation business logic****
-## It has been commented as // --- Tier Calculation Logic ---
+## It starts from the comment // --- Tier Calculation Logic ---
