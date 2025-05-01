@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 import static org.hamcrest.Matchers.*; // Import necessary matchers
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -78,28 +79,28 @@ class CustomerManagerApplicationTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(6)))
 				// Assert specific customers by email and check their tier (or other fields)
-				.andExpect(jsonPath("$[?(@.email == 'bronze1@example.com')].membershipTier", contains("Bronze")))
-				.andExpect(jsonPath("$[?(@.email == 'gold2@example.com')].membershipTier", contains("Gold")))
-				.andExpect(jsonPath("$[?(@.email == 'bronze3@example.com')].membershipTier", contains("Bronze")))
-				.andExpect(jsonPath("$[?(@.email == 'platinum4@example.com')].membershipTier", contains("Platinum")))
-				.andExpect(jsonPath("$[?(@.email == 'bronze5@example.com')].membershipTier", contains("Bronze")))
-				.andExpect(jsonPath("$[?(@.email == 'bronze6@example.com')].membershipTier", contains("Bronze")));
+				.andExpect(jsonPath("$[?(@.email == 'bronze1@example.com')].memberShipTier", contains("Bronze")))
+				.andExpect(jsonPath("$[?(@.email == 'gold2@example.com')].memberShipTier", contains("Gold")))
+				.andExpect(jsonPath("$[?(@.email == 'bronze3@example.com')].memberShipTier", contains("Bronze")))
+				.andExpect(jsonPath("$[?(@.email == 'platinum4@example.com')].memberShipTier", contains("Platinum")))
+				.andExpect(jsonPath("$[?(@.email == 'bronze5@example.com')].memberShipTier", contains("Bronze")))
+				.andExpect(jsonPath("$[?(@.email == 'bronze6@example.com')].memberShipTier", contains("Bronze")));
 	}
 
 	@Test
 	void testGetCustomersByName_ReturnsDTOsWithTier() throws Exception {
 		LocalDateTime fixedNow = LocalDateTime.of(2025, 4, 22, 21, 0);
-		createCustomer("John", "john.doe1@example.com", new BigDecimal("3000.00"), fixedNow.minusMonths(10)); // Gold criteria
-		createCustomer("Jane", "jane.doe2@example.com", new BigDecimal("500.00"), fixedNow.minusMonths(1)); // Bronze criteria
-		createCustomer("Peter", "peter.jones1@example.com", new BigDecimal("12000.00"), fixedNow.minusMonths(4)); // Platinum criteria
+		createCustomer("John Doe", "john.doe1@example.com", new BigDecimal("3000.00"), fixedNow.minusMonths(10)); // Gold criteria
+		createCustomer("Jane Doe", "jane.doe2@example.com", new BigDecimal("500.00"), fixedNow.minusMonths(1)); // Bronze criteria
+		createCustomer("Peter Jones", "peter.jones1@example.com", new BigDecimal("12000.00"), fixedNow.minusMonths(4)); // Platinum criteria
 
 		mockMvc.perform(get("/api/customers")
-						.param("name", "Doe") // Search by last name
+						.param("name", "Doe") // Search by name
 						.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(2)))
-				.andExpect(jsonPath("$[?(@.name == 'John')].membershipTier", contains("Gold")))
-				.andExpect(jsonPath("$[?(@.name == 'Jane')].membershipTier", contains("Bronze")));
+				.andExpect(jsonPath("$[?(@.name == 'John Doe')].memberShipTier", contains("Gold")))
+				.andExpect(jsonPath("$[?(@.name == 'Jane Doe')].memberShipTier", contains("Bronze")));
 	}
 
 	@Test
@@ -113,7 +114,7 @@ class CustomerManagerApplicationTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id", is(customer.getCustomerId().intValue())))
 				.andExpect(jsonPath("$.name", is("Peter")))
-				.andExpect(jsonPath("$.membershipTier", is("Platinum"))); // Check the tier
+				.andExpect(jsonPath("$.memberShipTier", is("Platinum"))); // Check the tier
 	}
 
 	@Test
@@ -135,11 +136,12 @@ class CustomerManagerApplicationTest {
 
 		mockMvc.perform(get("/api/customers/{id}", customer.getCustomerId())
 						.contentType(MediaType.APPLICATION_JSON))
+				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id", is(customer.getCustomerId().intValue())))
 				.andExpect(jsonPath("$.name", is("Platinum")))
 				.andExpect(jsonPath("$.lastPurchaseDate", is(purchaseDate.format(ISO_FORMATTER))))
-				.andExpect(jsonPath("$.membershipTier", is("Platinum"))); // Assert the calculated tier
+				.andExpect(jsonPath("$.memberShipTier", is("Platinum"))); // Assert the calculated tier
 	}
 
 	@Test
@@ -160,13 +162,13 @@ class CustomerManagerApplicationTest {
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(newCustomer)))
 				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.id").exists())
-				.andExpect(jsonPath("$.name", is("New")))
+				.andExpect(jsonPath("$.customerId").exists())
+				.andExpect(jsonPath("$.name", is("NewCustomer")))
 				.andExpect(jsonPath("$.lastPurchaseDate", is(purchaseDate.format(ISO_FORMATTER))));
 
 		assertEquals(1, customerRepository.count());
 		Customer savedCustomer = customerRepository.findAll().get(0);
-		assertEquals("New", savedCustomer.getName());
+		assertEquals("NewCustomer", savedCustomer.getName());
 		assertEquals(purchaseDate.withNano(0), savedCustomer.getLastPurchaseDate().withNano(0));
 	}
 
@@ -183,16 +185,17 @@ class CustomerManagerApplicationTest {
 		mockMvc.perform(put("/api/customers/{id}", existingCustomer.getCustomerId())
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(objectMapper.writeValueAsString(updatedDetails)))
+				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.id", is(existingCustomer.getCustomerId().intValue())))
-				.andExpect(jsonPath("$.name", is("Updated")))
+				.andExpect(jsonPath("$.customerId", is(existingCustomer.getCustomerId().intValue())))
+				.andExpect(jsonPath("$.name", is("UpdatedName")))
 				.andExpect(jsonPath("$.email", is("updated.n@example.com")))
 				.andExpect(jsonPath("$.annualSpend", is(2500.00)))
 				.andExpect(jsonPath("$.lastPurchaseDate", is(updatedPurchaseDate.format(ISO_FORMATTER))));
 
 
 		Customer updatedCustomer = customerRepository.findById(existingCustomer.getCustomerId()).orElseThrow();
-		assertEquals("Updated", updatedCustomer.getName());
+		assertEquals("UpdatedName", updatedCustomer.getName());
 		assertEquals("updated.n@example.com", updatedCustomer.getEmail());
 		assertEquals(new BigDecimal("2500.00"), updatedCustomer.getAnnualSpend());
 		assertEquals(updatedPurchaseDate.withNano(0), updatedCustomer.getLastPurchaseDate().withNano(0));

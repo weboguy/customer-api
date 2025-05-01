@@ -104,14 +104,14 @@ paths:
         schema:
           type: string
       responses:
+        "404":
+          description: Customer not found by email
         "200":
           description: Customers found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CustomerResponseDTO'
-        "404":
-          description: Customer not found by email
     post:
       tags:
       - Customers
@@ -148,14 +148,14 @@ paths:
           type: integer
           format: int64
       responses:
+        "404":
+          description: Customer not found
         "200":
           description: Tier calculated successfully
           content:
             text/plain:
               schema:
                 type: string
-        "404":
-          description: Customer not found
 components:
   schemas:
     Customer:

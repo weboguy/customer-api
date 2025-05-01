@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     // Method to find customers by last name
-    List<Customer> findByName(String name);
+    List<Customer> findByNameContainingIgnoreCase(String name);
 
     // Method to find a customer by email (assuming email is unique)
     Optional<Customer> findByEmail(String email);

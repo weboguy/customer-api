@@ -37,7 +37,7 @@ public class CustomerService {
     }
 
     public List<CustomerResponseDTO> getCustomersByNameDTO(String name) {
-        return customerRepository.findByName(name).stream()
+        return customerRepository.findByNameContainingIgnoreCase(name).stream()
                 .map(customer -> CustomerResponseDTO.fromEntity(customer, calculateMembershipTier(customer, LocalDateTime.now())))
                 .collect(Collectors.toList());
     }
