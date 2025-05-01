@@ -136,5 +136,11 @@ curl -X DELETE http://localhost:8082/api/customers/{id}
 Method 3: Using API Development Tools (Postman, Insomnia, IntelliJ HTTP Client)
 These tools provide a graphical interface for building and managing complex API requests.
 
+##For generating the openapi.yaml the maven plugin springdoc-openapi-maven-plugin has been included in pom.xml.
+##But if there are any issues generating it from the mvn clean package -U command then please use the following
+##command after the application is started. 
+curl http://localhost:8082/v3/api-docs.yaml -o docs/openapi.yaml
+
+
 ##**Please refer to the CusstomerService class for the tier calculation business logic****
 ## It starts from the comment // --- Tier Calculation Logic ---
